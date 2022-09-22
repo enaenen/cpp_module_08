@@ -1,10 +1,14 @@
 #include "Span.hpp"
 
-Span::Span( void ) : _n( 0 ), _size( 0 ) {}
+Span::Span( void ) : _n( 0 ), _size( 0 ) {
+}
 
-Span::Span( unsigned int n ) : _n( n ), _size( 0 ) {}
+Span::Span( unsigned int n ) : _n( n ), _size( 0 ) {
+}
 
-Span::Span( const Span &ref ) : _size( ref._size ) { *this = ref; }
+Span::Span( const Span &ref ) : _size( ref._size ) {
+	*this = ref;
+}
 
 Span &Span::operator=( const Span &ref ) {
 	if ( this == &ref )
@@ -17,7 +21,8 @@ Span &Span::operator=( const Span &ref ) {
 	for ( ; it != ite; ++it ) list.insert( *it );
 	return *this;
 }
-Span::~Span( void ) {}
+Span::~Span( void ) {
+}
 
 void Span::addNumber( const unsigned int n ) {
 	if ( list.size() == _n )
@@ -37,7 +42,7 @@ void Span::randomGenerate( const unsigned int &inputSize,
 	try {
 		for ( unsigned int i = 0; i < inputSize; i++ )
 			addNumber( rand() % limit );
-	} catch ( std::exception e ) {
+	} catch ( std::exception &e ) {
 		std::cout << e.what() << std::endl;
 	}
 }

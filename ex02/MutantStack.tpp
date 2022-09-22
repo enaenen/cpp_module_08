@@ -1,6 +1,7 @@
 
 template <typename T>
-MutantStack<T>::MutantStack( void ) {}
+MutantStack<T>::MutantStack( void ) {
+}
 
 template <typename T>
 MutantStack<T>::MutantStack( const MutantStack<T> &ref ) {
@@ -16,7 +17,8 @@ MutantStack<T> &MutantStack<T>::operator=( const MutantStack<T> &ref ) {
 }
 
 template <typename T>
-MutantStack<T>::~MutantStack( void ) {}
+MutantStack<T>::~MutantStack( void ) {
+}
 
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin( void ) {
