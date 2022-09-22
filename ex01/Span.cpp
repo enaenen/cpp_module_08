@@ -12,29 +12,17 @@ Span &Span::operator=( const Span &ref ) {
 	list.clear();
 	_n = ref._n;
 	_size = ref._size;
-	for ( unsigned int i = 0; i < ref._size; i++ )
-		list.push_back( ref.list[i] );
+	std::multiset<int>::iterator it = ref.list.begin();
+	std::multiset<int>::iterator ite = ref.list.end();
+	for ( ; it != ite; ++it ) list.insert( *it );
 	return *this;
 }
 Span::~Span( void ) {}
 
-int &Span::operator[]( const unsigned int idx ) {
-	if ( _size <= idx )
-		throw std::out_of_range( "Array out of range" );
-	return list[idx];
-}
-const int &Span::operator[]( const unsigned int idx ) const {
-	if ( _size <= idx )
-		throw std::out_of_range( "Array out of range" );
-	return list[idx];
-}
-
-unsigned int Span::size( void ) const { return _size; }
-
 void Span::addNumber( const unsigned int n ) {
 	if ( list.size() == _n )
 		throw std::out_of_range( "Array out of range" );
-	list.push_back( n );
+	list.insert( n );
 	_size++;
 }
 
@@ -42,9 +30,40 @@ void Span::randomGenerate( const unsigned int &inputSize,
 						   const unsigned int &limit ) {
 	if ( _n < list.size() + inputSize )
 		throw std::out_of_range( "Array out of range" );
+
 	struct timeval t;
+	gettimeofday( &t, NULL );
+	srand( t.tv_usec );
+	try {
+		for ( unsigned int i = 0; i < inputSize; i++ )
+			addNumber( rand() % limit );
+	} catch ( std::exception e ) {
+		std::cout << e.what() << std::endl;
+	}
 }
 
-unsigned int Span::shortestSpan( void ) {}
-unsigned int Span::longestSpan( void ) {}
-void printElements( void ) {}
+unsigned int Span::shortestSpan( void ) {
+	long int min = UINT_MAX;
+	std::multiset<int>::iterator it = ++list.begin();
+	std::multiset<int>::iterator ite = list.end();
+	for ( ; it != ite; ++it ) {
+		long int a = static_cast<long int>( *it );
+		long int b = static_cast<long int>( *prev( it ) );
+		if ( a - b < min )
+			min = a - b;
+	}
+	return min;
+}
+
+unsigned int Span::longestSpan( void ) {
+	int start = *list.begin();
+	int end = *list.rbegin();
+	return ( end - start );
+}
+
+void Span::printElements( void ) {
+	std::multiset<int>::iterator it = list.begin();
+	std::multiset<int>::iterator ite = list.end();
+	for ( ; it != ite; ++it ) std::cout << *it << " ";
+	std::cout << std::endl;
+}

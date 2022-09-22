@@ -2,12 +2,14 @@
 
 #include <iostream>
 #include <exception>
-#include <vector>
+#include <set>
 #include <sys/time.h>
+#include <iterator>
+#include <algorithm>
 
 class Span {
    private:
-	std::vector<int> list;
+	std::multiset<int> list;
 	unsigned int _n;
 	unsigned int _size;
 
@@ -26,8 +28,8 @@ class Span {
 	void addNumber( const unsigned int n );
 	unsigned int shortestSpan( void );
 	unsigned int longestSpan( void );
-	void Span::randomGenerate( const unsigned int &inputSize,
-							   const unsigned int &limit );
+	void randomGenerate( const unsigned int &inputSize,
+						 const unsigned int &limit );
 
 	void printElements( void );
 };
