@@ -47,8 +47,9 @@ unsigned int Span::shortestSpan( void ) {
 	std::multiset<int>::iterator it = ++list.begin();
 	std::multiset<int>::iterator ite = list.end();
 	for ( ; it != ite; ++it ) {
+		std::multiset<int>::iterator prev = it;
 		long int a = static_cast<long int>( *it );
-		long int b = static_cast<long int>( *prev( it ) );
+		long int b = static_cast<long int>( *--prev );
 		if ( a - b < min )
 			min = a - b;
 	}

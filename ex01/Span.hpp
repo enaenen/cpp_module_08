@@ -4,8 +4,8 @@
 #include <exception>
 #include <set>
 #include <sys/time.h>
-#include <iterator>
 #include <algorithm>
+#include <climits>
 
 class Span {
    private:
