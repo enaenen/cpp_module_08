@@ -1,4 +1,4 @@
 TARGET = mutantstack
-SRCS = main.cpp MutantStack.cpp
+SRCS = main.cpp
 
 include ../template.mk
